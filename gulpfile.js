@@ -5,21 +5,15 @@ const imagemin = require('gulp-imagemin');
 const babel = require('gulp-babel');
 const concat = require('gulp-concat');
 
-//Autoprefix the CSS using gulp-autoprefixer
-task('autoprefixer', () => {
+//Function to autoprefix and minify the CSS
+function css() {
   return src('src/css/style.css')
-  .pipe(autoprefixer({
+    .pipe(autoprefixer({
     cascade: false
   }))
-    .pipe(dest('dist/css'));
-});
-
-//Minify the CSS using gulp-clean-css
-task('minify-css', () => {
-  return src('src/css/style.css')
-    .pipe(cleanCSS({compatibility: 'ie8'}))
-    .pipe(dest('dist/css'));
-});
+  .pipe(cleanCSS({compatibility: 'ie8'}))
+  .pipe(dest('dist/css'));
+}
 
 //Optimize the images using gulp-imagemin
 task('imagemin', () => {
@@ -28,7 +22,7 @@ task('imagemin', () => {
   .pipe(dest('dist/images'))
 });
 
-//Function to concatenate the JS into a single file 'main.js', transpile it from ES5 to ES6 and minify it
+//Function to concatenate the JS into a single file 'main.js', transpile it from ES5 to ES6 and minify it`
 function js() {
   return src(['src/js/resources.js', 'src/js/app.js', 'src/js/engine.js'])
     .pipe(concat('main.js'))
