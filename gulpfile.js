@@ -1,6 +1,7 @@
 const {task, src, dest, parallel, watch} = require('gulp');
 const autoprefixer = require('gulp-autoprefixer');
 const cleanCSS = require('gulp-clean-css');
+const imagemin = require('gulp-imagemin');
 
 //Autoprefix the CSS using gulp-autoprefixer
 task('autoprefixer', () => {
@@ -19,6 +20,12 @@ task('minify-css', () => {
 });
 
 //Optimize the images using gulp-imagemin
+task('imagemin', () => {
+  return src('src/images/*')
+  .pipe(imagemin())
+  .pipe(dest('dist/images'))
+});
+
 //Transpile the JS from ES6 to ES5 using gulp-babel
 //Concatenate the JS into a single file (call it main.js) using gulp-concat. These files will need to be concatenated in a specific order so that they are loaded without errors.
 //Minify the JS using gulp-uglify
