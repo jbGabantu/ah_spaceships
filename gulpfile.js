@@ -15,12 +15,12 @@ function css() {
   .pipe(dest('dist/css'));
 }
 
-//Optimize the images using gulp-imagemin
-task('imagemin', () => {
+//Function to optimize the images
+function images() {
   return src('src/images/*')
   .pipe(imagemin())
-  .pipe(dest('dist/images'))
-});
+  .pipe(dest('dist/images'));
+}
 
 //Function to concatenate the JS into a single file 'main.js', transpile it from ES5 to ES6 and minify it`
 function js() {
