@@ -34,3 +34,9 @@ function js() {
     .pipe(uglify())
     .pipe(dest('dist/js'));
 }
+
+//Copy over the HTML from src to dist
+function copyHtml() {
+  return src('src/*.html')
+      .pipe(dest('dist'));
+}
