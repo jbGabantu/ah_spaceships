@@ -1,9 +1,16 @@
-const {task, src, dest, parallel, watch} = require('gulp');
+const {src, dest, parallel, watch} = require('gulp');
 const autoprefixer = require('gulp-autoprefixer');
 const cleanCSS = require('gulp-clean-css');
 const imagemin = require('gulp-imagemin');
-const babel = require('gulp-babel');
 const concat = require('gulp-concat');
+const babel = require('gulp-babel');
+const uglify = require('gulp-uglify');
+
+//Copy the HTML from src to dist
+function copyHtml() {
+  return src('src/*.html')
+      .pipe(dest('dist'));
+}
 
 //Function to autoprefix and minify the CSS
 function css() {
@@ -35,8 +42,10 @@ function js() {
     .pipe(dest('dist/js'));
 }
 
-//Copy over the HTML from src to dist
-function copyHtml() {
-  return src('src/*.html')
-      .pipe(dest('dist'));
-}
+//Gulp watch task to watch for changes
+function watcher() {
+  watch('src/*.html');
+  watch('src/css/style.css');
+  watch('src/images/*');
+  watch(['src/js/resources.js', 'src/js/app.js', 'src/js/engine.js']);
+};
