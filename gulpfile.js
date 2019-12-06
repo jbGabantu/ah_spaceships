@@ -3,6 +3,7 @@ const autoprefixer = require('gulp-autoprefixer');
 const cleanCSS = require('gulp-clean-css');
 const imagemin = require('gulp-imagemin');
 const babel = require('gulp-babel');
+const concat = require('gulp-concat');
 
 //Autoprefix the CSS using gulp-autoprefixer
 task('autoprefixer', () => {
@@ -36,4 +37,9 @@ task('default', () => {
   .pipe(dest('dist/js'))
 });
 
-  
+//Concatenate the JS into a single file 'main.js' using gulp-concat
+task('scripts', () => {
+  return src(['dist/js/resources.js', 'dist/js/app.js', 'dist/js/engine.js'])
+    .pipe(concat('main.js'))
+    .pipe(dest('dist/js'));
+});
