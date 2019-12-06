@@ -28,18 +28,20 @@ task('imagemin', () => {
   .pipe(dest('dist/images'))
 });
 
-//Transpile the JS from ES6 to ES5 using gulp-babel
-task('default', () => {
-  return src('src/js/*')
-  .pipe(babel({
-    presets: ['@babel/env']
-    }))
-  .pipe(dest('dist/js'))
-});
-
 //Concatenate the JS into a single file 'main.js' using gulp-concat
 task('scripts', () => {
   return src(['dist/js/resources.js', 'dist/js/app.js', 'dist/js/engine.js'])
     .pipe(concat('main.js'))
     .pipe(dest('dist/js'));
+});
+
+//Transpile the JS from ES6 to ES5 using gulp-babel
+task('default', () => {
+  return src('dist/js/main.js')
+  .pipe(babel({
+    presets: 
+      [['@babel/preset-env', {
+        modules: false}]]
+    }))
+  .pipe(dest('dist/js'))
 });
