@@ -49,3 +49,6 @@ function watcher() {
   watch('src/images/*');
   watch(['src/js/resources.js', 'src/js/app.js', 'src/js/engine.js']);
 };
+
+//Gulp task to run all the gulp taks
+exports.all = parallel(copyHtml, css, js, images, watcher);
